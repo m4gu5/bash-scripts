@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Checks what hosts are online in an IPv4 class c (/24) network
+# Requires the fping package
+# Author: twitter.com/m4gu5
+
+
+# Check if an argument was specified
+if [ ! $1 ]
+then
+	echo "Usage: $0 <network to be checked>"
+	echo "Usage example: $0 192.168.2.0"
+	exit
+else
+	network=$1
+fi
+
+
+# Cut off the network id
+network=$(echo $network | cut -d. -f1).$(echo $network | cut -d. -f2).$(echo $network | cut -d. -f3).
+
+# Collection with values from 1 to 254 (0 = network id, 255 = broadcast)
+lastOctet=`seq 254`
+
+for i in $lastOctet
+do
+	# Ping each and every host in the network and check if it responds
+	fping -c 1 $network$i > /dev/null 2> /dev/null
+	if [ $? -eq 0 ]
+	# If host did respond
+	then
+		echo "$network$i is up"	
+	fi
+done

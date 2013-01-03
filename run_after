@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Author: twitter.com/m4gu5
+# This script lets you execute a program after all instances of the specified program had quit
+# For example, you could do a shutdown -h now after all updates were installed (Arch Linux): run_after pacman shutdown "-h now"
+
+waitfor=$1
+program=$2
+arguments=$3
+
+echo "Wait for running instances of $waitfor..."
+
+while :
+do
+	pidof $waitfor > /dev/null
+	
+	if [ $? -eq 1 ]
+	# When previous instances had quit
+	then
+		break
+	else
+		# Check every 5 seconds
+		sleep 5	
+	fi
+done
+
+$program $arguments

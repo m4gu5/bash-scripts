@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Checks what hosts are online in an IPv4 class c (/24) network
-# Requires the fping package
+# Requires the fping and ifconfig package
 # Author: twitter.com/m4gu5
 
 
@@ -29,6 +29,14 @@ do
 	if [ $? -eq 0 ]
 	# If host did respond
 	then
-		echo "$network$i is up"	
+		$(ifconfig | egrep "$network$i  netmask*" > /dev/null 2> /dev/null)
+
+		if [ $? -eq 0 ]
+		# IP address is your own
+		then
+			echo -e "\e[0;31m$network$i is up\e[0m"
+		else	
+			echo "$network$i is up"	
+		fi
 	fi
 done

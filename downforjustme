@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Uses downforeveryoneorjustme.com to check if a specified website is up or down
+# Quick & dirty implementation
+# Author: @m4gu5
+
+address=$1
+
+curl http://downforeveryoneorjustme.com/$address | grep "It's just you." >/dev/null
+
+echo 
+
+if [ $? == 0 ]
+# If server is up
+then
+	echo "It's just you. $address is up and running."
+else
+	echo "It's not just you. $address is offline."
+fi

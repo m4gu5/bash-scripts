@@ -13,9 +13,9 @@ then
 else
     path=$1
     if [ "$S" != */ ]
-    # If directory does not ends with a /, add it
+    # If directory does not end with a /, add it
     then
-        path="$path/" 
+        path="$path/"
     fi
 fi
 
@@ -28,6 +28,11 @@ if ! [ -f $absoluteFilename ]
 # If picture was not already downloaded
 then
     wget $imageurl -P $path
+    if [ "$?" -ne 0 ]
+    then
+        echo "APOD cannot be downloaded. Please check your internet connection."
+        exit 1
+    fi
 fi
 
 # Sets the desktop wallpaper

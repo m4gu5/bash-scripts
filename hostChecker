@@ -36,7 +36,7 @@ do
 		then
 			echo -e "\e[0;31m$network$i\e[0m"
 		else	
-			echo "$network$i is up"	
+			echo "$network$i"	
 		fi
 	fi
 done

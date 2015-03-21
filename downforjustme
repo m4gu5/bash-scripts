@@ -8,12 +8,12 @@ address=$1
 
 curl http://downforeveryoneorjustme.com/$address | grep "It's just you." >/dev/null
 
-echo 
-
 if [ $? == 0 ]
-# If server is up
 then
-	echo "It's just you. $address is up and running."
+        # It's just you
+	echo "1"
 else
-	echo "It's not just you. $address is offline."
+        # It's not just you
+	echo "0"
+        exit 1
 fi

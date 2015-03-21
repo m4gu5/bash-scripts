@@ -4,6 +4,7 @@ m4gu5 bash scripts
 downforjustme 
 -------------
 Uses http://downforeveryoneorjustme.com to check if a site is down for everyone or just you.
+If site is online, prints 1 and return code is 0. If site is offline, prints 0 and return code is 1.
 
 Example usage:
 *./downforjustme http://github.com*

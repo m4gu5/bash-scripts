@@ -34,9 +34,9 @@ do
 		if [ $? -eq 0 ]
 		# IP address is your own
 		then
-			echo -e "\e[0;31m$network$i is up\e[0m"
+			echo -e "\e[0;31m$network$i\e[0m"
 		else	
-			echo "$network$i is up"	
+			echo "$network$i"	
 		fi
 	fi
 done
